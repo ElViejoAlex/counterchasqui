@@ -61,22 +61,46 @@ button.theme{position:fixed;right:14px;bottom:14px;border:1px solid var(--line);
 .showcard li:last-child{border-bottom:0}
 .showcard li::before{content:counter(o,upper-alpha);font-weight:800;color:var(--accent);min-width:1.4em}
 .showcard .tag{display:inline-block;font-size:13px;font-weight:700;background:var(--accent);color:var(--surface);border-radius:6px;padding:2px 8px}
+.showcard ol.coded li::before{content:none}
+.showcard ol.coded .c{min-width:1.6em;color:var(--accent);font-weight:800}
+.solo-impresion{display:none}
 footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
 @media print{
-  :root{--bg:#fff;--surface:#fff;--ink:#000;--muted:#444;--line:#bbb;--accent:#1f5f4a;--accent-soft:#eef5f1;--warn-soft:#fdf3e6}
-  body{font-size:12pt}
-  header.top,button.theme,nav.toc{display:none}
+  @page{size:A4;margin:11mm 12mm}
+  :root{--bg:#fff;--surface:#fff;--ink:#000;--muted:#444;--line:#c8c8c8;--accent:#1f5f4a;--accent-soft:#eef5f1;--warn-soft:#fdf3e6}
+  body{font-size:10.5pt;line-height:1.4}
+  header.top,button.theme,nav.toc,.solo-pantalla{display:none!important}
+  .solo-impresion{display:block}
+  .titulo-impreso{font-weight:700;font-size:13pt;margin:0 0 4pt;color:var(--accent)}
   main{max-width:none;padding:0}
-  section.card{border:0;padding:0;margin:0;break-before:page}
-  section.card:first-of-type{break-before:auto}
-  details{border:0}
-  details>summary{list-style:none}
+  section.card{border:0;border-top:1.5pt solid var(--accent);border-radius:0;padding:4pt 0 0;margin:10pt 0 0}
+  section.card:first-of-type{margin-top:0}
+  .kind{margin-top:0;font-size:8pt}
+  h2{font-size:13pt;margin:1pt 0 4pt;break-after:avoid}
+  p{margin:4pt 0}
+  .read{font-size:11pt;line-height:1.45}
+  .note,.warn{padding:5pt 8pt;margin:5pt 0}
+  details{border:0;padding:0}
+  details>summary{list-style:none;font-size:11pt;padding:3pt 0 0}
   details>summary::-webkit-details-marker{display:none}
-  .showcard{break-inside:avoid;break-before:page;border-width:3px}
-  .showcard li{font-size:17pt;padding:6pt 0}
-  .showcard .q{font-size:17pt}
-  ol.codes li{padding:3pt 0}
-  .read{font-size:13pt}
+  details.solo-nota>summary,details.solo-nota>ol{display:none}
+  details,.note,.warn,table,tr,li,.showcard{break-inside:avoid}
+  ol.codes li{padding:2pt 0}
+  table{font-size:10pt}
+  th,td{padding:3pt 4pt}
+  /* Tarjetas: varias por página en dos columnas, sin cortarse */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:4mm 5mm;align-items:start}
+  .showcard{margin:0;padding:5pt 8pt;border-width:1.2pt;border-style:dashed}
+  .showcard.wide{grid-column:1 / -1}
+  .showcard.wide ol{columns:2;column-gap:7mm}
+  #consentimiento,#hogar,#matriz-d,#saltos,#cierre{break-inside:avoid}
+  .showcard table{table-layout:fixed}
+  .showcard .q{font-size:11pt;margin:2pt 0 2pt;line-height:1.3}
+  .showcard .rule{font-size:9pt;margin:0 0 2pt}
+  .showcard li{font-size:10.5pt;padding:1.6pt 0;gap:7pt;line-height:1.3}
+  .showcard .tag{font-size:8pt}
+  .showcard table{font-size:9.5pt}
+  footer{margin-top:10pt;font-size:8pt}
 }
 </style>
 </head>
@@ -87,6 +111,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
 </header>
 
 <main>
+<p class="solo-impresion titulo-impreso">Censo Comunitario Comuna El Carmen · Guía del encuestador/a</p>
 <nav class="toc" aria-label="Contenido">
   <ol>
     <li><a href="#consentimiento">Consentimiento informado (leer en voz alta)</a></li>
@@ -133,7 +158,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   <span class="kind">Sección 2 · Una fila por persona</span>
   <h2>Catálogos de la Matriz A: registro demográfico</h2>
 
-  <details open><summary>Parentesco con el jefe/a de hogar</summary>
+  <details open class="solo-pantalla"><summary>Parentesco con el jefe/a de hogar</summary>
   <ol class="codes">
     <li><span class="c">1</span>Jefe/a</li>
     <li><span class="c">2</span>Cónyuge o conviviente</li>
@@ -155,7 +180,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   </ol>
   <div class="note">Si marca 3 o 4, registre también a la persona en la Sección 7 (Migración).</div></details>
 
-  <details open><summary>Estado civil (12 años y más)</summary>
+  <details open class="solo-pantalla"><summary>Estado civil (12 años y más)</summary>
   <ol class="codes">
     <li><span class="c">1</span>Soltero/a</li>
     <li><span class="c">2</span>Unión libre</li>
@@ -165,7 +190,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
     <li><span class="c">6</span>Viudo/a</li>
   </ol></details>
 
-  <details open><summary>Autoidentificación étnica (INEC)</summary>
+  <details open class="solo-pantalla"><summary>Autoidentificación étnica (INEC)</summary>
   <ol class="codes">
     <li><span class="c">1</span>Indígena → registre pueblo o nacionalidad</li>
     <li><span class="c">2</span>Afroecuatoriano/a o afrodescendiente</li>
@@ -178,7 +203,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
     <li><span class="c">9</span>No sabe / No responde</li>
   </ol></details>
 
-  <details open><summary>Pueblo o nacionalidad (solo si autoidentificación = 1)</summary>
+  <details open class="solo-pantalla"><summary>Pueblo o nacionalidad (solo si autoidentificación = 1)</summary>
   <p class="sub">Sierra</p>
   <ol class="codes">
     <li><span class="c">01</span>Kitu Kara</li>
@@ -220,7 +245,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
     <li><span class="c">99</span>No sabe / No responde</li>
   </ol></details>
 
-  <details open><summary>Kichwa</summary>
+  <details open class="solo-pantalla"><summary>Kichwa</summary>
   <ol class="codes">
     <li><span class="c">1</span>Habla y entiende</li>
     <li><span class="c">2</span>Solo entiende, no habla</li>
@@ -241,7 +266,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
 </section>
 
 <!-- 4 ─────────────────────────────────────────────── -->
-<section class="card" id="matriz-b">
+<section class="card solo-pantalla" id="matriz-b">
   <span class="kind">Sección 2 · Personas de 5 años y más</span>
   <h2>Catálogos de la Matriz B: educación</h2>
   <div class="note">«¿Asiste actualmente?» solo a personas de 5 a 29 años. «Motivo de no asistencia» solo a personas de 5 a 17 años que no asisten.</div>
@@ -299,66 +324,9 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   </ol>
   <div class="warn">Si la condición es 3: en «Categoría de ocupación» registre 12 y deje en blanco rama, ocupación y sitio de trabajo.</div></details>
 
-  <details open><summary>Rama de actividad: secciones CIIU 4.0</summary>
-  <ol class="codes">
-    <li><span class="c">A</span>Agricultura, ganadería, silvicultura y pesca</li>
-    <li><span class="c">B</span>Explotación de minas y canteras</li>
-    <li><span class="c">C</span>Industrias manufactureras</li>
-    <li><span class="c">D</span>Suministro de electricidad, gas, vapor y aire acondicionado</li>
-    <li><span class="c">E</span>Distribución de agua; alcantarillado, gestión de desechos y saneamiento</li>
-    <li><span class="c">F</span>Construcción</li>
-    <li><span class="c">G</span>Comercio al por mayor y al por menor; reparación de vehículos y motocicletas</li>
-    <li><span class="c">H</span>Transporte y almacenamiento</li>
-    <li><span class="c">I</span>Actividades de alojamiento y de servicio de comidas</li>
-    <li><span class="c">J</span>Información y comunicación</li>
-    <li><span class="c">K</span>Actividades financieras y de seguros</li>
-    <li><span class="c">L</span>Actividades inmobiliarias</li>
-    <li><span class="c">M</span>Actividades profesionales, científicas y técnicas</li>
-    <li><span class="c">N</span>Actividades de servicios administrativos y de apoyo</li>
-    <li><span class="c">O</span>Administración pública y defensa; planes de seguridad social obligatoria</li>
-    <li><span class="c">P</span>Enseñanza</li>
-    <li><span class="c">Q</span>Actividades de atención de la salud humana y de asistencia social</li>
-    <li><span class="c">R</span>Artes, entretenimiento y recreación</li>
-    <li><span class="c">S</span>Otras actividades de servicios</li>
-    <li><span class="c">T</span>Actividades de los hogares como empleadores y como productores de bienes o servicios para uso propio</li>
-    <li><span class="c">U</span>Actividades de organizaciones y órganos extraterritoriales</li>
-  </ol>
-  <div class="note"><strong>Frontera A / C:</strong> ordeñar y vender leche cruda es sección A (agricultura y ganadería). Procesar la leche en queso para venderlo es sección C (industria manufacturera).</div>
-  <div class="note">Registre siempre la descripción textual de la actividad y de las tareas, aunque ya haya marcado la letra de sección: permite codificar después a nivel de división o clase.</div></details>
+  <div class="note">Rama de actividad, categoría de ocupación y sitio de trabajo: use las <a href="#tarjetas">tarjetas 1, 2 y 3</a>.</div>
 
-  <details open><summary>Categoría de ocupación (ENEMDU)</summary>
-  <ol class="codes">
-    <li><span class="c">1</span>Empleado/a u obrero/a de Gobierno, Estado o Municipio</li>
-    <li><span class="c">2</span>Empleado/a u obrero/a privado/a</li>
-    <li><span class="c">3</span>Empleado/a u obrero/a tercerizado/a</li>
-    <li><span class="c">4</span>Jornalero/a o peón</li>
-    <li><span class="c">5</span>Patrono/a</li>
-    <li><span class="c">6</span>Socio/a</li>
-    <li><span class="c">7</span>Cuenta propia</li>
-    <li><span class="c">8</span>Trabajador/a del hogar no remunerado</li>
-    <li><span class="c">9</span>Trabajador/a no remunerado en otro hogar</li>
-    <li><span class="c">10</span>Ayudante no remunerado de asalariado/a o jornalero/a</li>
-    <li><span class="c">11</span>Empleado/a doméstico/a</li>
-    <li><span class="c">12</span>No aplica (no trabajó ni tuvo trabajo)</li>
-  </ol></details>
-
-  <details open><summary>Sitio de trabajo (ENEMDU)</summary>
-  <ol class="codes">
-    <li><span class="c">1</span>Local de una empresa o del patrono</li>
-    <li><span class="c">2</span>Local propio o arrendado</li>
-    <li><span class="c">3</span>Su vivienda</li>
-    <li><span class="c">4</span>Vivienda distinta a la suya</li>
-    <li><span class="c">5</span>Su finca o terreno</li>
-    <li><span class="c">6</span>Finca o terreno ajeno</li>
-    <li><span class="c">7</span>Finca, terreno o establecimiento comunal</li>
-    <li><span class="c">8</span>Una obra en construcción</li>
-    <li><span class="c">9</span>Al descubierto en la calle</li>
-    <li><span class="c">10</span>Kiosco en la calle</li>
-    <li><span class="c">11</span>Se desplaza</li>
-    <li><span class="c">12</span>Local de cooperativa o asociación</li>
-  </ol></details>
-
-  <details open><summary>Aporte a seguridad social (15 años y más)</summary>
+  <details open class="solo-pantalla"><summary>Aporte a seguridad social (15 años y más)</summary>
   <ol class="codes">
     <li><span class="c">1</span>IESS Seguro General</li>
     <li><span class="c">2</span>IESS Seguro Voluntario</li>
@@ -376,7 +344,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   <div class="note">Aplique a TODOS los predios que el hogar posee, usufructúa u ocupa dentro de la comuna, tengan o no vivienda, aunque el hogar no resida en la comuna. Empiece por el predio donde se hace la entrevista. El número de predios registrados debe coincidir con la pregunta 6.</div>
   <div class="warn">No registre el nombre completo de terceros que no están presentes: anote solo el código del padrón del Cabildo.</div>
 
-  <details open><summary>Titular del predio</summary>
+  <details open class="solo-pantalla"><summary>Titular del predio</summary>
   <ol class="codes">
     <li><span class="c">1</span>Miembro de este hogar → N.° de fila de la Matriz A</li>
     <li><span class="c">2</span>Otra persona → código del padrón</li>
@@ -384,7 +352,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
     <li><span class="c">4</span>No sabe / No responde</li>
   </ol></details>
 
-  <details open><summary>Usos actuales (anote todos los que apliquen)</summary>
+  <details open class="solo-pantalla"><summary>Usos actuales (anote todos los que apliquen)</summary>
   <ol class="codes">
     <li><span class="c">1</span>Vivienda</li>
     <li><span class="c">2</span>Producción agrícola o ganadera</li>
@@ -396,7 +364,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
     <li><span class="c">8</span>Otro (especifique)</li>
   </ol></details>
 
-  <details open><summary>Tipo de producción (solo si usos incluye 2)</summary>
+  <details open class="solo-pantalla"><summary>Tipo de producción (solo si usos incluye 2)</summary>
   <ol class="codes">
     <li><span class="c">1</span>Agrícola (cultivos)</li>
     <li><span class="c">2</span>Lechera / ganado bovino</li>
@@ -405,7 +373,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
     <li><span class="c">5</span>Otra (especifique)</li>
   </ol></details>
 
-  <details open><summary>Superficie aproximada</summary>
+  <details open class="solo-nota"><summary>Superficie aproximada</summary>
   <ol class="codes">
     <li><span class="c">1</span>Menos de 500 m²</li>
     <li><span class="c">2</span>De 500 a 1.000 m²</li>
@@ -416,7 +384,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   </ol>
   <div class="note">1 hectárea = 10.000 m².</div></details>
 
-  <details open><summary>Figura de propiedad frente a la Comuna</summary>
+  <details open class="solo-pantalla"><summary>Figura de propiedad frente a la Comuna</summary>
   <ol class="codes">
     <li><span class="c">1</span>Derecho de usufructo comunitario</li>
     <li><span class="c">2</span>Escritura pública individual</li>
@@ -426,7 +394,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
     <li><span class="c">6</span>No sabe / No responde</li>
   </ol></details>
 
-  <details open><summary>Forma de acceso al predio</summary>
+  <details open class="solo-pantalla"><summary>Forma de acceso al predio</summary>
   <ol class="codes">
     <li><span class="c">1</span>Herencia</li>
     <li><span class="c">2</span>Asignación por parte de la Comuna</li>
@@ -436,7 +404,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
     <li><span class="c">6</span>No sabe / No responde</li>
   </ol></details>
 
-  <details open><summary>Disputas en los últimos 5 años</summary>
+  <details open class="solo-pantalla"><summary>Disputas en los últimos 5 años</summary>
   <ol class="codes">
     <li><span class="c">1</span>Sí, controversia vigente</li>
     <li><span class="c">2</span>Sí, ocurrió antes y se solucionó</li>
@@ -447,7 +415,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
 </section>
 
 <!-- 7 ─────────────────────────────────────────────── -->
-<section class="card" id="otros">
+<section class="card solo-pantalla" id="otros">
   <span class="kind">Secciones 7 y 8</span>
   <h2>Otros códigos cortos</h2>
   <details open><summary>Motivo de salida (pregunta 39, migración)</summary>
@@ -474,10 +442,80 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
 <section class="card" id="tarjetas">
   <span class="kind">Para mostrar al informante</span>
   <h2>Tarjetas de respuesta</h2>
-  <p>Listas largas o delicadas que conviene que el informante <strong>lea por sí mismo</strong> en lugar de escucharlas. Imprima estas páginas (una tarjeta por hoja), enmícalas y entréguelas al preguntar. El informante responde con la letra; usted marca la opción en KoboCollect.</p>
+  <p>Listas largas o delicadas que conviene que el informante <strong>lea por sí mismo</strong> en lugar de escucharlas. Imprima estas páginas, recorte cada tarjeta, enmícala y entréguela al preguntar. El informante responde con la letra o el código; usted marca la opción en KoboCollect.</p>
+
+<div class="cards">
+  <div class="showcard wide" id="t-rama">
+    <span class="tag">Tarjeta 1 · Matriz C</span>
+    <p class="q">¿A qué se dedica principalmente la empresa, negocio, finca o establecimiento donde trabaja(ba)?</p>
+    <p class="rule">Rama de actividad · secciones CIIU 4.0</p>
+    <ol class="coded">
+    <li><span class="c">A</span>Agricultura, ganadería, silvicultura y pesca</li>
+    <li><span class="c">B</span>Explotación de minas y canteras</li>
+    <li><span class="c">C</span>Industrias manufactureras</li>
+    <li><span class="c">D</span>Suministro de electricidad, gas, vapor y aire acondicionado</li>
+    <li><span class="c">E</span>Distribución de agua; alcantarillado, gestión de desechos y saneamiento</li>
+    <li><span class="c">F</span>Construcción</li>
+    <li><span class="c">G</span>Comercio al por mayor y al por menor; reparación de vehículos y motocicletas</li>
+    <li><span class="c">H</span>Transporte y almacenamiento</li>
+    <li><span class="c">I</span>Actividades de alojamiento y de servicio de comidas</li>
+    <li><span class="c">J</span>Información y comunicación</li>
+    <li><span class="c">K</span>Actividades financieras y de seguros</li>
+    <li><span class="c">L</span>Actividades inmobiliarias</li>
+    <li><span class="c">M</span>Actividades profesionales, científicas y técnicas</li>
+    <li><span class="c">N</span>Actividades de servicios administrativos y de apoyo</li>
+    <li><span class="c">O</span>Administración pública y defensa; planes de seguridad social obligatoria</li>
+    <li><span class="c">P</span>Enseñanza</li>
+    <li><span class="c">Q</span>Actividades de atención de la salud humana y de asistencia social</li>
+    <li><span class="c">R</span>Artes, entretenimiento y recreación</li>
+    <li><span class="c">S</span>Otras actividades de servicios</li>
+    <li><span class="c">T</span>Actividades de los hogares como empleadores y como productores de bienes o servicios para uso propio</li>
+    <li><span class="c">U</span>Actividades de organizaciones y órganos extraterritoriales</li>
+    </ol>
+  <div class="note solo-pantalla"><strong>Frontera A / C:</strong> ordeñar y vender leche cruda es sección A (agricultura y ganadería). Procesar la leche en queso para venderlo es sección C (industria manufacturera).</div>
+  <div class="note solo-pantalla">Registre siempre la descripción textual de la actividad y de las tareas, aunque ya haya marcado la letra de sección: permite codificar después a nivel de división o clase.</div>
+  </div>
+
+  <div class="showcard" id="t-categoria">
+    <span class="tag">Tarjeta 2 · Matriz C</span>
+    <p class="q">Categoría de ocupación</p>
+    <ol class="coded">
+    <li><span class="c">1</span>Empleado/a u obrero/a de Gobierno, Estado o Municipio</li>
+    <li><span class="c">2</span>Empleado/a u obrero/a privado/a</li>
+    <li><span class="c">3</span>Empleado/a u obrero/a tercerizado/a</li>
+    <li><span class="c">4</span>Jornalero/a o peón</li>
+    <li><span class="c">5</span>Patrono/a</li>
+    <li><span class="c">6</span>Socio/a</li>
+    <li><span class="c">7</span>Cuenta propia</li>
+    <li><span class="c">8</span>Trabajador/a del hogar no remunerado</li>
+    <li><span class="c">9</span>Trabajador/a no remunerado en otro hogar</li>
+    <li><span class="c">10</span>Ayudante no remunerado de asalariado/a o jornalero/a</li>
+    <li><span class="c">11</span>Empleado/a doméstico/a</li>
+    <li><span class="c">12</span>No aplica (no trabajó ni tuvo trabajo)</li>
+    </ol>
+  </div>
+
+  <div class="showcard" id="t-sitio">
+    <span class="tag">Tarjeta 3 · Matriz C</span>
+    <p class="q">Sitio de trabajo</p>
+    <ol class="coded">
+    <li><span class="c">1</span>Local de una empresa o del patrono</li>
+    <li><span class="c">2</span>Local propio o arrendado</li>
+    <li><span class="c">3</span>Su vivienda</li>
+    <li><span class="c">4</span>Vivienda distinta a la suya</li>
+    <li><span class="c">5</span>Su finca o terreno</li>
+    <li><span class="c">6</span>Finca o terreno ajeno</li>
+    <li><span class="c">7</span>Finca, terreno o establecimiento comunal</li>
+    <li><span class="c">8</span>Una obra en construcción</li>
+    <li><span class="c">9</span>Al descubierto en la calle</li>
+    <li><span class="c">10</span>Kiosco en la calle</li>
+    <li><span class="c">11</span>Se desplaza</li>
+    <li><span class="c">12</span>Local de cooperativa o asociación</li>
+    </ol>
+  </div>
 
   <div class="showcard" id="t-ingresos">
-    <span class="tag">Tarjeta 1 · Pregunta 40</span>
+    <span class="tag">Tarjeta 4 · Pregunta 40</span>
     <p class="q">Ingreso mensual total del hogar (sumando a todos sus integrantes)</p>
     <ol>
       <li>Menos de USD 235</li>
@@ -491,7 +529,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   </div>
 
   <div class="showcard" id="t-fuentes">
-    <span class="tag">Tarjeta 2 · Pregunta 41</span>
+    <span class="tag">Tarjeta 5 · Pregunta 41</span>
     <p class="q">¿De qué actividades provienen los mayores ingresos del hogar?</p>
     <p class="rule">Elija hasta 3</p>
     <ol>
@@ -510,7 +548,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   </div>
 
   <div class="showcard" id="t-satisfaccion">
-    <span class="tag">Tarjeta 3 · Pregunta 31</span>
+    <span class="tag">Tarjeta 6 · Pregunta 31</span>
     <p class="q">¿Qué tan satisfecho/a está con cada aspecto del servicio de agua?</p>
     <table>
       <tr><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
@@ -528,7 +566,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   </div>
 
   <div class="showcard" id="t-contaminacion">
-    <span class="tag">Tarjeta 4 · Preguntas 34 y 35</span>
+    <span class="tag">Tarjeta 7 · Preguntas 34 y 35</span>
     <p class="q">Nivel de contaminación en: quebradas · páramos · bosques · vertientes y fuentes de agua · suelos agrícolas · aire</p>
     <p class="rule">Alto · Medio · Bajo · Ninguno · No sabe</p>
     <p class="q">¿A qué atribuye principalmente esa contaminación?</p>
@@ -548,7 +586,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   </div>
 
   <div class="showcard" id="t-limitantes">
-    <span class="tag">Tarjeta 5 · Pregunta 59</span>
+    <span class="tag">Tarjeta 8 · Pregunta 59</span>
     <p class="q">¿Qué factores limitan su involucramiento en las labores de la comuna?</p>
     <p class="rule">Puede elegir varias</p>
     <ol>
@@ -565,7 +603,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   </div>
 
   <div class="showcard" id="t-tradiciones">
-    <span class="tag">Tarjeta 6 · Pregunta 62</span>
+    <span class="tag">Tarjeta 9 · Pregunta 62</span>
     <p class="q">¿Usted o algún pariente del hogar posee conocimientos o realiza prácticas vinculadas a estas tradiciones?</p>
     <p class="rule">Puede elegir varias</p>
     <ol>
@@ -581,7 +619,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   </div>
 
   <div class="showcard" id="t-requerimientos">
-    <span class="tag">Tarjeta 7 · Pregunta 66</span>
+    <span class="tag">Tarjeta 10 · Pregunta 66</span>
     <p class="q">¿Qué requerimientos considera necesarios para incrementar los ingresos de su hogar?</p>
     <p class="rule">Elija hasta 3</p>
     <ol>
@@ -600,7 +638,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   </div>
 
   <div class="showcard" id="t-iniciativas">
-    <span class="tag">Tarjeta 8 · Pregunta 68</span>
+    <span class="tag">Tarjeta 11 · Pregunta 68</span>
     <p class="q">¿En qué iniciativas comunitarias estaría interesado/a en colaborar?</p>
     <p class="rule">Puede elegir varias</p>
     <ol>
@@ -617,7 +655,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   </div>
 
   <div class="showcard" id="t-problematicas">
-    <span class="tag">Tarjeta 9 · Pregunta 69</span>
+    <span class="tag">Tarjeta 12 · Pregunta 69</span>
     <p class="q">Señale las TRES problemáticas más críticas para la comuna</p>
     <p class="rule">Elija exactamente 3</p>
     <ol>
@@ -642,7 +680,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
   </div>
 
   <div class="showcard" id="t-grupos">
-    <span class="tag">Tarjeta 10 · Pregunta 70</span>
+    <span class="tag">Tarjeta 13 · Pregunta 70</span>
     <p class="q">¿Qué grupos deberían ser priorizados en las gestiones del Cabildo?</p>
     <p class="rule">Elija hasta 3</p>
     <ol>
@@ -655,6 +693,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
       <li>Familias sin tierra</li>
     </ol>
   </div>
+</div>
 </section>
 
 <!-- 9 ─────────────────────────────────────────────── -->
