@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía del Encuestador</title>
+<meta name="description" content="Censo Comunitario Comuna El Carmen — fragmentos de apoyo para aplicar el formulario en KoboCollect.">
+<style>
+:root{
+  --bg:#fbfaf7; --surface:#ffffff; --ink:#1d1d1b; --muted:#5e5b55; --line:#dcd8cf;
+  --accent:#1f5f4a; --accent-soft:#e3efe9; --warn:#8a4b0f; --warn-soft:#fbeedd; --code:#1f5f4a;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#151614; --surface:#1e201d; --ink:#ecebe6; --muted:#a8a59d; --line:#34372f;
+    --accent:#7cc6a8; --accent-soft:#1f3129; --warn:#f0b36e; --warn-soft:#382a19; --code:#7cc6a8;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151614; --surface:#1e201d; --ink:#ecebe6; --muted:#a8a59d; --line:#34372f;
+  --accent:#7cc6a8; --accent-soft:#1f3129; --warn:#f0b36e; --warn-soft:#382a19; --code:#7cc6a8;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+header.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line);padding:10px 16px}
+header.top h1{font-size:17px;margin:0 0 6px;line-height:1.3}
+header.top input{width:100%;font:inherit;font-size:17px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+main{max-width:760px;margin:0 auto;padding:12px 16px 80px}
+nav.toc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:8px 0 18px}
+nav.toc ol{margin:0;padding-left:22px}
+nav.toc li{margin:6px 0}
+a{color:var(--accent)}
+section.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px 16px 14px;margin:0 0 18px;scroll-margin-top:100px}
+h2{font-size:21px;margin:14px 0 6px;color:var(--accent)}
+h3{font-size:18px;margin:18px 0 6px}
+.kind{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+p{margin:8px 0}
+.read{font-size:19px;line-height:1.65}
+.note{background:var(--accent-soft);border-radius:10px;padding:10px 12px;margin:10px 0}
+.warn{background:var(--warn-soft);color:var(--ink);border-left:4px solid var(--warn);border-radius:8px;padding:10px 12px;margin:10px 0}
+ol.codes,ul.codes{list-style:none;padding:0;margin:6px 0}
+ol.codes li,ul.codes li{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--line)}
+ol.codes li:last-child,ul.codes li:last-child{border-bottom:0}
+.c{flex:0 0 auto;min-width:2.3em;font-weight:700;color:var(--code);font-variant-numeric:tabular-nums}
+.sub{font-size:14px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin:14px 0 2px}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{text-align:left;vertical-align:top;padding:7px 6px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:600;font-size:14px}
+details{border-top:1px solid var(--line);padding:4px 0}
+details:first-of-type{border-top:0}
+summary{cursor:pointer;font-weight:700;padding:8px 0;font-size:18px}
+.hidden{display:none!important}
+button.theme{position:fixed;right:14px;bottom:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:10px 14px;font:inherit;font-size:15px}
+/* Tarjetas para mostrar al informante */
+.showcard{border:2px solid var(--accent);border-radius:14px;padding:12px 16px;margin:12px 0}
+.showcard .q{font-size:19px;font-weight:700;margin:4px 0 10px}
+.showcard .rule{font-size:15px;font-weight:700;color:var(--warn);margin:0 0 8px}
+.showcard ol{margin:0;padding:0;list-style:none;counter-reset:o}
+.showcard li{counter-increment:o;display:flex;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:19px}
+.showcard li:last-child{border-bottom:0}
+.showcard li::before{content:counter(o,upper-alpha);font-weight:800;color:var(--accent);min-width:1.4em}
+.showcard .tag{display:inline-block;font-size:13px;font-weight:700;background:var(--accent);color:var(--surface);border-radius:6px;padding:2px 8px}
+footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
+@media print{
+  :root{--bg:#fff;--surface:#fff;--ink:#000;--muted:#444;--line:#bbb;--accent:#1f5f4a;--accent-soft:#eef5f1;--warn-soft:#fdf3e6}
+  body{font-size:12pt}
+  header.top,button.theme,nav.toc{display:none}
+  main{max-width:none;padding:0}
+  section.card{border:0;padding:0;margin:0;break-before:page}
+  section.card:first-of-type{break-before:auto}
+  details{border:0}
+  details>summary{list-style:none}
+  details>summary::-webkit-details-marker{display:none}
+  .showcard{break-inside:avoid;break-before:page;border-width:3px}
+  .showcard li{font-size:17pt;padding:6pt 0}
+  .showcard .q{font-size:17pt}
+  ol.codes li{padding:3pt 0}
+  .read{font-size:13pt}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Censo Comunitario El Carmen · Guía del encuestador/a</h1>
+  <input id="q" type="search" placeholder="Buscar código u opción (ej.: Kayambi, jornalero, 470)" aria-label="Buscar en la guía">
+</header>
+
+<main>
+<nav class="toc" aria-label="Contenido">
+  <ol>
+    <li><a href="#consentimiento">Consentimiento informado (leer en voz alta)</a></li>
+    <li><a href="#hogar">Definición de hogar y preguntas de sondeo</a></li>
+    <li><a href="#matriz-a">Catálogos Matriz A: personas</a></li>
+    <li><a href="#matriz-b">Catálogos Matriz B: educación</a></li>
+    <li><a href="#matriz-c">Catálogos Matriz C: trabajo</a></li>
+    <li><a href="#matriz-d">Catálogos Matriz D: predios</a></li>
+    <li><a href="#otros">Otros códigos cortos (migración, cultivos)</a></li>
+    <li><a href="#tarjetas">Tarjetas para mostrar al informante</a></li>
+    <li><a href="#saltos">Flujo del formulario (quién responde qué)</a></li>
+    <li><a href="#cierre">Texto de cierre</a></li>
+  </ol>
+</nav>
+
+<!-- 1 ─────────────────────────────────────────────── -->
+<section class="card" id="consentimiento">
+  <span class="kind">Sección 0B · Leer textualmente</span>
+  <h2>Consentimiento informado</h2>
+  <p class="read">El Cabildo de la Comuna El Carmen, con el apoyo técnico de la Facultad de Ciencias Sociales y Humanas de la Universidad Central del Ecuador, está levantando un censo comunitario. La finalidad es contar con información propia para la planificación comunal, la gestión de proyectos y la defensa del territorio.</p>
+  <p class="read">Participar es voluntario. Usted puede negarse a responder cualquier pregunta y puede interrumpir la entrevista en cualquier momento, sin ninguna consecuencia. La información se usará únicamente de forma agregada: en los informes y publicaciones no aparecerán nombres ni datos que permitan identificar a personas u hogares. Los formularios quedarán bajo custodia del Cabildo. Usted puede solicitar al Cabildo el acceso, la rectificación o la eliminación de sus datos.</p>
+  <p class="read">Algunas preguntas se refieren a datos sensibles (salud, discapacidad, ingresos, autoidentificación étnica y tenencia de la tierra). Se recogen solo con el fin señalado y con su autorización expresa.</p>
+  <p class="read"><strong>0.2. ¿Autoriza usted la aplicación de este formulario y el tratamiento de los datos en los términos indicados?</strong><br>Sí, autorizo · No autorizo</p>
+  <div class="warn">Si NO autoriza: agradezca y termine la entrevista. Registre «Rechazo» en la pregunta 0.1.</div>
+</section>
+
+<!-- 2 ─────────────────────────────────────────────── -->
+<section class="card" id="hogar">
+  <span class="kind">Pregunta 4 · Matriz A</span>
+  <h2>Definición de hogar y preguntas de sondeo</h2>
+  <p><strong>Hogar (definición INEC):</strong> personas que comen y duermen habitualmente en la vivienda.</p>
+  <p>Registre en la Matriz A a TODAS esas personas, comenzando por el jefe o jefa de hogar (fila 01). Antes de cerrar el listado, pregunte expresamente:</p>
+  <ul>
+    <li>¿Hay bebés o niños pequeños?</li>
+    <li>¿Alguna persona adulta mayor?</li>
+    <li>¿Alguien de viaje u hospitalizado que vive normalmente aquí?</li>
+    <li>¿Algún trabajador o trabajadora que duerma aquí?</li>
+  </ul>
+  <div class="note">Pregunta 12 (cuartos): no cuente baños, cocina, pasillos ni garaje.</div>
+</section>
+
+<!-- 3 ─────────────────────────────────────────────── -->
+<section class="card" id="matriz-a">
+  <span class="kind">Sección 2 · Una fila por persona</span>
+  <h2>Catálogos de la Matriz A: registro demográfico</h2>
+
+  <details open><summary>Parentesco con el jefe/a de hogar</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Jefe/a</li>
+    <li><span class="c">2</span>Cónyuge o conviviente</li>
+    <li><span class="c">3</span>Hijo/a</li>
+    <li><span class="c">4</span>Yerno o nuera</li>
+    <li><span class="c">5</span>Nieto/a</li>
+    <li><span class="c">6</span>Padres o suegros</li>
+    <li><span class="c">7</span>Otros parientes</li>
+    <li><span class="c">8</span>Empleado/a doméstico/a</li>
+    <li><span class="c">9</span>Otros no parientes</li>
+  </ol></details>
+
+  <details open><summary>Residencia habitual</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Reside aquí de forma permanente</li>
+    <li><span class="c">2</span>Reside aquí pero está temporalmente ausente (viaje, estudio, hospitalización)</li>
+    <li><span class="c">3</span>Reside en otro lugar del país pero es miembro del hogar</li>
+    <li><span class="c">4</span>Reside en el exterior</li>
+  </ol>
+  <div class="note">Si marca 3 o 4, registre también a la persona en la Sección 7 (Migración).</div></details>
+
+  <details open><summary>Estado civil (12 años y más)</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Soltero/a</li>
+    <li><span class="c">2</span>Unión libre</li>
+    <li><span class="c">3</span>Casado/a</li>
+    <li><span class="c">4</span>Separado/a</li>
+    <li><span class="c">5</span>Divorciado/a</li>
+    <li><span class="c">6</span>Viudo/a</li>
+  </ol></details>
+
+  <details open><summary>Autoidentificación étnica (INEC)</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Indígena → registre pueblo o nacionalidad</li>
+    <li><span class="c">2</span>Afroecuatoriano/a o afrodescendiente</li>
+    <li><span class="c">3</span>Negro/a</li>
+    <li><span class="c">4</span>Mulato/a</li>
+    <li><span class="c">5</span>Montubio/a</li>
+    <li><span class="c">6</span>Mestizo/a</li>
+    <li><span class="c">7</span>Blanco/a</li>
+    <li><span class="c">8</span>Otro (especifique)</li>
+    <li><span class="c">9</span>No sabe / No responde</li>
+  </ol></details>
+
+  <details open><summary>Pueblo o nacionalidad (solo si autoidentificación = 1)</summary>
+  <p class="sub">Sierra</p>
+  <ol class="codes">
+    <li><span class="c">01</span>Kitu Kara</li>
+    <li><span class="c">02</span>Kayambi</li>
+    <li><span class="c">03</span>Karanki</li>
+    <li><span class="c">04</span>Otavalo</li>
+    <li><span class="c">05</span>Natabuela</li>
+    <li><span class="c">06</span>Panzaleo</li>
+    <li><span class="c">07</span>Chibuleo</li>
+    <li><span class="c">08</span>Salasaka</li>
+    <li><span class="c">09</span>Waranka</li>
+    <li><span class="c">10</span>Puruhá</li>
+    <li><span class="c">11</span>Cañari</li>
+    <li><span class="c">12</span>Saraguro</li>
+  </ol>
+  <p class="sub">Amazonía</p>
+  <ol class="codes">
+    <li><span class="c">21</span>Kichwa de la Amazonía</li>
+    <li><span class="c">22</span>Shuar</li>
+    <li><span class="c">23</span>Achuar</li>
+    <li><span class="c">24</span>Shiwiar</li>
+    <li><span class="c">25</span>Andoa</li>
+    <li><span class="c">26</span>Sápara</li>
+    <li><span class="c">27</span>Waorani</li>
+    <li><span class="c">28</span>A'i Cofán</li>
+    <li><span class="c">29</span>Siona</li>
+    <li><span class="c">30</span>Secoya</li>
+  </ol>
+  <p class="sub">Costa</p>
+  <ol class="codes">
+    <li><span class="c">41</span>Awá</li>
+    <li><span class="c">42</span>Chachi</li>
+    <li><span class="c">43</span>Épera</li>
+    <li><span class="c">44</span>Tsáchila</li>
+  </ol>
+  <p class="sub">Otros</p>
+  <ol class="codes">
+    <li><span class="c">60</span>Otro pueblo o nacionalidad (especifique)</li>
+    <li><span class="c">99</span>No sabe / No responde</li>
+  </ol></details>
+
+  <details open><summary>Kichwa</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Habla y entiende</li>
+    <li><span class="c">2</span>Solo entiende, no habla</li>
+    <li><span class="c">3</span>No habla ni entiende</li>
+  </ol></details>
+
+  <details open><summary>Discapacidad</summary>
+  <ol class="codes">
+    <li><span class="c">0</span>No tiene discapacidad</li>
+    <li><span class="c">1</span>Física o motora</li>
+    <li><span class="c">2</span>Visual</li>
+    <li><span class="c">3</span>Auditiva</li>
+    <li><span class="c">4</span>Intelectual</li>
+    <li><span class="c">5</span>Psicosocial (mental)</li>
+    <li><span class="c">6</span>Otra / múltiple</li>
+  </ol>
+  <div class="note">Esta pregunta no constituye diagnóstico médico: registre lo declarado por el informante.</div></details>
+</section>
+
+<!-- 4 ─────────────────────────────────────────────── -->
+<section class="card" id="matriz-b">
+  <span class="kind">Sección 2 · Personas de 5 años y más</span>
+  <h2>Catálogos de la Matriz B: educación</h2>
+  <div class="note">«¿Asiste actualmente?» solo a personas de 5 a 29 años. «Motivo de no asistencia» solo a personas de 5 a 17 años que no asisten.</div>
+
+  <details open><summary>Nivel de instrucción más alto aprobado (ENEMDU)</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Ninguno</li>
+    <li><span class="c">2</span>Centro de alfabetización</li>
+    <li><span class="c">3</span>Jardín de infantes</li>
+    <li><span class="c">4</span>Primaria (sistema anterior)</li>
+    <li><span class="c">5</span>Educación básica (sistema actual)</li>
+    <li><span class="c">6</span>Secundaria (sistema anterior)</li>
+    <li><span class="c">7</span>Educación media / bachillerato (sistema actual)</li>
+    <li><span class="c">8</span>Superior no universitario (técnico o tecnológico)</li>
+    <li><span class="c">9</span>Superior universitario</li>
+    <li><span class="c">10</span>Postgrado (maestría o doctorado)</li>
+  </ol>
+  <div class="note">Registre además el AÑO o GRADO más alto aprobado dentro de ese nivel.</div></details>
+
+  <details open><summary>Lugar del establecimiento educativo</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Escuela de la comuna El Carmen</li>
+    <li><span class="c">2</span>Otro establecimiento en Checa</li>
+    <li><span class="c">3</span>Establecimiento en Yaruquí</li>
+    <li><span class="c">4</span>Quito (área urbana)</li>
+    <li><span class="c">5</span>Otro cantón o provincia</li>
+    <li><span class="c">6</span>Modalidad virtual o a distancia</li>
+    <li><span class="c">7</span>Otro (especifique)</li>
+  </ol></details>
+
+  <details open><summary>Motivo de no asistencia</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Falta de recursos económicos</li>
+    <li><span class="c">2</span>Por trabajo</li>
+    <li><span class="c">3</span>Terminó sus estudios</li>
+    <li><span class="c">4</span>No hay establecimiento cercano / falta de cupo</li>
+    <li><span class="c">5</span>Falta de transporte</li>
+    <li><span class="c">6</span>Enfermedad o discapacidad</li>
+    <li><span class="c">7</span>Embarazo o cuidado de hijos</li>
+    <li><span class="c">8</span>No está interesado/a</li>
+    <li><span class="c">9</span>Otro (especifique)</li>
+  </ol></details>
+</section>
+
+<!-- 5 ─────────────────────────────────────────────── -->
+<section class="card" id="matriz-c">
+  <span class="kind">Sección 2 · Personas de 5 años y más</span>
+  <h2>Catálogos de la Matriz C: trabajo y seguridad social</h2>
+
+  <details open><summary>Condición de actividad la semana pasada (filtro ENEMDU)</summary>
+  <ol class="codes">
+    <li><span class="c">1</span><span><strong>OCUPADO/A:</strong> trabajó al menos una hora, o no trabajó pero tiene un trabajo al que volverá</span></li>
+    <li><span class="c">2</span><span><strong>DESOCUPADO/A:</strong> no trabajó y realizó alguna gestión para buscar trabajo en las últimas 4 semanas</span></li>
+    <li><span class="c">3</span><span><strong>INACTIVO/A:</strong> no trabajó ni buscó trabajo (estudiante, quehaceres del hogar, jubilado/a, rentista, incapacitado/a, menor)</span></li>
+  </ol>
+  <div class="warn">Si la condición es 3: en «Categoría de ocupación» registre 12 y deje en blanco rama, ocupación y sitio de trabajo.</div></details>
+
+  <details open><summary>Rama de actividad: secciones CIIU 4.0</summary>
+  <ol class="codes">
+    <li><span class="c">A</span>Agricultura, ganadería, silvicultura y pesca</li>
+    <li><span class="c">B</span>Explotación de minas y canteras</li>
+    <li><span class="c">C</span>Industrias manufactureras</li>
+    <li><span class="c">D</span>Suministro de electricidad, gas, vapor y aire acondicionado</li>
+    <li><span class="c">E</span>Distribución de agua; alcantarillado, gestión de desechos y saneamiento</li>
+    <li><span class="c">F</span>Construcción</li>
+    <li><span class="c">G</span>Comercio al por mayor y al por menor; reparación de vehículos y motocicletas</li>
+    <li><span class="c">H</span>Transporte y almacenamiento</li>
+    <li><span class="c">I</span>Actividades de alojamiento y de servicio de comidas</li>
+    <li><span class="c">J</span>Información y comunicación</li>
+    <li><span class="c">K</span>Actividades financieras y de seguros</li>
+    <li><span class="c">L</span>Actividades inmobiliarias</li>
+    <li><span class="c">M</span>Actividades profesionales, científicas y técnicas</li>
+    <li><span class="c">N</span>Actividades de servicios administrativos y de apoyo</li>
+    <li><span class="c">O</span>Administración pública y defensa; planes de seguridad social obligatoria</li>
+    <li><span class="c">P</span>Enseñanza</li>
+    <li><span class="c">Q</span>Actividades de atención de la salud humana y de asistencia social</li>
+    <li><span class="c">R</span>Artes, entretenimiento y recreación</li>
+    <li><span class="c">S</span>Otras actividades de servicios</li>
+    <li><span class="c">T</span>Actividades de los hogares como empleadores y como productores de bienes o servicios para uso propio</li>
+    <li><span class="c">U</span>Actividades de organizaciones y órganos extraterritoriales</li>
+  </ol>
+  <div class="note"><strong>Frontera A / C:</strong> ordeñar y vender leche cruda es sección A (agricultura y ganadería). Procesar la leche en queso para venderlo es sección C (industria manufacturera).</div>
+  <div class="note">Registre siempre la descripción textual de la actividad y de las tareas, aunque ya haya marcado la letra de sección: permite codificar después a nivel de división o clase.</div></details>
+
+  <details open><summary>Categoría de ocupación (ENEMDU)</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Empleado/a u obrero/a de Gobierno, Estado o Municipio</li>
+    <li><span class="c">2</span>Empleado/a u obrero/a privado/a</li>
+    <li><span class="c">3</span>Empleado/a u obrero/a tercerizado/a</li>
+    <li><span class="c">4</span>Jornalero/a o peón</li>
+    <li><span class="c">5</span>Patrono/a</li>
+    <li><span class="c">6</span>Socio/a</li>
+    <li><span class="c">7</span>Cuenta propia</li>
+    <li><span class="c">8</span>Trabajador/a del hogar no remunerado</li>
+    <li><span class="c">9</span>Trabajador/a no remunerado en otro hogar</li>
+    <li><span class="c">10</span>Ayudante no remunerado de asalariado/a o jornalero/a</li>
+    <li><span class="c">11</span>Empleado/a doméstico/a</li>
+    <li><span class="c">12</span>No aplica (no trabajó ni tuvo trabajo)</li>
+  </ol></details>
+
+  <details open><summary>Sitio de trabajo (ENEMDU)</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Local de una empresa o del patrono</li>
+    <li><span class="c">2</span>Local propio o arrendado</li>
+    <li><span class="c">3</span>Su vivienda</li>
+    <li><span class="c">4</span>Vivienda distinta a la suya</li>
+    <li><span class="c">5</span>Su finca o terreno</li>
+    <li><span class="c">6</span>Finca o terreno ajeno</li>
+    <li><span class="c">7</span>Finca, terreno o establecimiento comunal</li>
+    <li><span class="c">8</span>Una obra en construcción</li>
+    <li><span class="c">9</span>Al descubierto en la calle</li>
+    <li><span class="c">10</span>Kiosco en la calle</li>
+    <li><span class="c">11</span>Se desplaza</li>
+    <li><span class="c">12</span>Local de cooperativa o asociación</li>
+  </ol></details>
+
+  <details open><summary>Aporte a seguridad social (15 años y más)</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>IESS Seguro General</li>
+    <li><span class="c">2</span>IESS Seguro Voluntario</li>
+    <li><span class="c">3</span>Seguro Campesino</li>
+    <li><span class="c">4</span>Seguro del ISSFA o ISSPOL</li>
+    <li><span class="c">5</span>No aporta</li>
+    <li><span class="c">6</span>No sabe</li>
+  </ol></details>
+</section>
+
+<!-- 6 ─────────────────────────────────────────────── -->
+<section class="card" id="matriz-d">
+  <span class="kind">Sección 3 · Una fila por predio</span>
+  <h2>Catálogos de la Matriz D: predios, tierra y territorio</h2>
+  <div class="note">Aplique a TODOS los predios que el hogar posee, usufructúa u ocupa dentro de la comuna, tengan o no vivienda, aunque el hogar no resida en la comuna. Empiece por el predio donde se hace la entrevista. El número de predios registrados debe coincidir con la pregunta 6.</div>
+  <div class="warn">No registre el nombre completo de terceros que no están presentes: anote solo el código del padrón del Cabildo.</div>
+
+  <details open><summary>Titular del predio</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Miembro de este hogar → N.° de fila de la Matriz A</li>
+    <li><span class="c">2</span>Otra persona → código del padrón</li>
+    <li><span class="c">3</span>Predio de propiedad comunal</li>
+    <li><span class="c">4</span>No sabe / No responde</li>
+  </ol></details>
+
+  <details open><summary>Usos actuales (anote todos los que apliquen)</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Vivienda</li>
+    <li><span class="c">2</span>Producción agrícola o ganadera</li>
+    <li><span class="c">3</span>Comercio o negocio</li>
+    <li><span class="c">4</span>Pastoreo</li>
+    <li><span class="c">5</span>Uso forestal</li>
+    <li><span class="c">6</span>Arrendado o cedido a terceros</li>
+    <li><span class="c">7</span>Sin uso / en desuso</li>
+    <li><span class="c">8</span>Otro (especifique)</li>
+  </ol></details>
+
+  <details open><summary>Tipo de producción (solo si usos incluye 2)</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Agrícola (cultivos)</li>
+    <li><span class="c">2</span>Lechera / ganado bovino</li>
+    <li><span class="c">3</span>Especies menores (cuyes, aves, cerdos)</li>
+    <li><span class="c">4</span>Forestal</li>
+    <li><span class="c">5</span>Otra (especifique)</li>
+  </ol></details>
+
+  <details open><summary>Superficie aproximada</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Menos de 500 m²</li>
+    <li><span class="c">2</span>De 500 a 1.000 m²</li>
+    <li><span class="c">3</span>De 1.001 a 2.500 m²</li>
+    <li><span class="c">4</span>De 2.501 a 5.000 m²</li>
+    <li><span class="c">5</span>Más de 5.000 m² → anote las hectáreas</li>
+    <li><span class="c">6</span>No sabe</li>
+  </ol>
+  <div class="note">1 hectárea = 10.000 m².</div></details>
+
+  <details open><summary>Figura de propiedad frente a la Comuna</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Derecho de usufructo comunitario</li>
+    <li><span class="c">2</span>Escritura pública individual</li>
+    <li><span class="c">3</span>Ambas (usufructo y escritura)</li>
+    <li><span class="c">4</span>Posesión sin documento</li>
+    <li><span class="c">5</span>Ninguna</li>
+    <li><span class="c">6</span>No sabe / No responde</li>
+  </ol></details>
+
+  <details open><summary>Forma de acceso al predio</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Herencia</li>
+    <li><span class="c">2</span>Asignación por parte de la Comuna</li>
+    <li><span class="c">3</span>Compraventa</li>
+    <li><span class="c">4</span>Arriendo o cesión</li>
+    <li><span class="c">5</span>Otra vía (especifique)</li>
+    <li><span class="c">6</span>No sabe / No responde</li>
+  </ol></details>
+
+  <details open><summary>Disputas en los últimos 5 años</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Sí, controversia vigente</li>
+    <li><span class="c">2</span>Sí, ocurrió antes y se solucionó</li>
+    <li><span class="c">3</span>Sí, antes y sigue sin solución</li>
+    <li><span class="c">4</span>No, en ningún momento</li>
+    <li><span class="c">5</span>No responde</li>
+  </ol></details>
+</section>
+
+<!-- 7 ─────────────────────────────────────────────── -->
+<section class="card" id="otros">
+  <span class="kind">Secciones 7 y 8</span>
+  <h2>Otros códigos cortos</h2>
+  <details open><summary>Motivo de salida (pregunta 39, migración)</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Trabajo</li>
+    <li><span class="c">2</span>Estudios</li>
+    <li><span class="c">3</span>Reunificación familiar</li>
+    <li><span class="c">4</span>Matrimonio o unión</li>
+    <li><span class="c">5</span>Salud</li>
+    <li><span class="c">6</span>Otro</li>
+  </ol>
+  <div class="note">Solo personas que se fueron a partir de 2020 y no han regresado. Registre tanto la migración interna (Quito u otra ciudad) como la internacional. El parentesco usa los mismos códigos de la Matriz A.</div></details>
+
+  <details open><summary>Destino de la producción (pregunta 43, cultivos)</summary>
+  <ol class="codes">
+    <li><span class="c">1</span>Venta</li>
+    <li><span class="c">2</span>Consumo del hogar</li>
+    <li><span class="c">3</span>Ambos</li>
+    <li><span class="c">4</span>Alimento para animales</li>
+  </ol></details>
+</section>
+
+<!-- 8 ─────────────────────────────────────────────── -->
+<section class="card" id="tarjetas">
+  <span class="kind">Para mostrar al informante</span>
+  <h2>Tarjetas de respuesta</h2>
+  <p>Listas largas o delicadas que conviene que el informante <strong>lea por sí mismo</strong> en lugar de escucharlas. Imprima estas páginas (una tarjeta por hoja), enmícalas y entréguelas al preguntar. El informante responde con la letra; usted marca la opción en KoboCollect.</p>
+
+  <div class="showcard" id="t-ingresos">
+    <span class="tag">Tarjeta 1 · Pregunta 40</span>
+    <p class="q">Ingreso mensual total del hogar (sumando a todos sus integrantes)</p>
+    <ol>
+      <li>Menos de USD 235</li>
+      <li>USD 235 a USD 469</li>
+      <li>USD 470 a USD 799</li>
+      <li>USD 800 a USD 1.199</li>
+      <li>USD 1.200 o más</li>
+      <li>No sabe</li>
+      <li>Prefiere no responder</li>
+    </ol>
+  </div>
+
+  <div class="showcard" id="t-fuentes">
+    <span class="tag">Tarjeta 2 · Pregunta 41</span>
+    <p class="q">¿De qué actividades provienen los mayores ingresos del hogar?</p>
+    <p class="rule">Elija hasta 3</p>
+    <ol>
+      <li>Venta de leche y sus derivados</li>
+      <li>Cultivos y agricultura</li>
+      <li>Cría y venta de animales</li>
+      <li>Sueldos de integrantes con empleo en relación de dependencia</li>
+      <li>Ganancias de integrantes que trabajan por cuenta propia</li>
+      <li>Comercio o negocio propio</li>
+      <li>Jubilación, montepío o pensión</li>
+      <li>Bono de Desarrollo Humano u otras transferencias del Estado</li>
+      <li>Remesas de familiares en otro lugar</li>
+      <li>Arriendo de tierra, vivienda o local</li>
+      <li>Otra fuente</li>
+    </ol>
+  </div>
+
+  <div class="showcard" id="t-satisfaccion">
+    <span class="tag">Tarjeta 3 · Pregunta 31</span>
+    <p class="q">¿Qué tan satisfecho/a está con cada aspecto del servicio de agua?</p>
+    <table>
+      <tr><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+      <tr><td>Muy insatisfecho</td><td></td><td></td><td></td><td>Muy satisfecho</td></tr>
+    </table>
+    <p class="sub">Aspectos que se califican</p>
+    <ol>
+      <li>Cantidad de agua disponible</li>
+      <li>Calidad del agua (sabor, color, olor)</li>
+      <li>Continuidad (horarios y cortes)</li>
+      <li>Presión del agua</li>
+      <li>Tarifa o costo</li>
+      <li>Atención de la Junta de Agua</li>
+    </ol>
+  </div>
+
+  <div class="showcard" id="t-contaminacion">
+    <span class="tag">Tarjeta 4 · Preguntas 34 y 35</span>
+    <p class="q">Nivel de contaminación en: quebradas · páramos · bosques · vertientes y fuentes de agua · suelos agrícolas · aire</p>
+    <p class="rule">Alto · Medio · Bajo · Ninguno · No sabe</p>
+    <p class="q">¿A qué atribuye principalmente esa contaminación?</p>
+    <p class="rule">Elija hasta 3</p>
+    <ol>
+      <li>Basura arrojada por vecinos o visitantes</li>
+      <li>Descargas de aguas servidas</li>
+      <li>Agroquímicos y fertilizantes</li>
+      <li>Desechos de actividad ganadera</li>
+      <li>Actividad minera o canteras</li>
+      <li>Obras viales o de infraestructura</li>
+      <li>Actividad industrial cercana</li>
+      <li>Quemas</li>
+      <li>No percibe contaminación</li>
+      <li>No sabe</li>
+    </ol>
+  </div>
+
+  <div class="showcard" id="t-limitantes">
+    <span class="tag">Tarjeta 5 · Pregunta 59</span>
+    <p class="q">¿Qué factores limitan su involucramiento en las labores de la comuna?</p>
+    <p class="rule">Puede elegir varias</p>
+    <ol>
+      <li>Obligaciones laborales</li>
+      <li>Dificultades de movilidad o transporte</li>
+      <li>Ausencia de comunicación o información</li>
+      <li>Incompatibilidad de horarios</li>
+      <li>Edad o estado de salud</li>
+      <li>Responsabilidades de cuidado en el hogar</li>
+      <li>Desacuerdo con la dirigencia</li>
+      <li>Desinterés personal</li>
+      <li>Otro</li>
+    </ol>
+  </div>
+
+  <div class="showcard" id="t-tradiciones">
+    <span class="tag">Tarjeta 6 · Pregunta 62</span>
+    <p class="q">¿Usted o algún pariente del hogar posee conocimientos o realiza prácticas vinculadas a estas tradiciones?</p>
+    <p class="rule">Puede elegir varias</p>
+    <ol>
+      <li>Uso de vestimenta tradicional</li>
+      <li>Música y danzas ancestrales</li>
+      <li>Medicina natural o ritos (partería, yachak)</li>
+      <li>Narrativas, mitología o leyendas locales</li>
+      <li>Técnicas agrícolas o de manejo del agua tradicionales</li>
+      <li>Artesanía o tejido</li>
+      <li>Gastronomía tradicional</li>
+      <li>Ninguna de las anteriores</li>
+    </ol>
+  </div>
+
+  <div class="showcard" id="t-requerimientos">
+    <span class="tag">Tarjeta 7 · Pregunta 66</span>
+    <p class="q">¿Qué requerimientos considera necesarios para incrementar los ingresos de su hogar?</p>
+    <p class="rule">Elija hasta 3</p>
+    <ol>
+      <li>Acceso a crédito financiero</li>
+      <li>Capacitación técnica agrícola y ganadera</li>
+      <li>Capacitación en artes y oficios</li>
+      <li>Maquinaria y herramientas</li>
+      <li>Apoyo en comercialización y ventas</li>
+      <li>Mejora de los sistemas de riego</li>
+      <li>Transporte y logística</li>
+      <li>Centro de acopio o procesamiento de leche</li>
+      <li>Legalización de tierras</li>
+      <li>Oportunidades de acceso a educación universitaria</li>
+      <li>Otro</li>
+    </ol>
+  </div>
+
+  <div class="showcard" id="t-iniciativas">
+    <span class="tag">Tarjeta 8 · Pregunta 68</span>
+    <p class="q">¿En qué iniciativas comunitarias estaría interesado/a en colaborar?</p>
+    <p class="rule">Puede elegir varias</p>
+    <ol>
+      <li>Infraestructura (red vial, servicios hídricos)</li>
+      <li>Proyectos productivos (centro lácteo, agricultura)</li>
+      <li>Fomento al turismo</li>
+      <li>Formación en agroecología</li>
+      <li>Formación educativa y gestión cultural</li>
+      <li>Preservación y conservación del ambiente</li>
+      <li>Seguridad comunitaria</li>
+      <li>Separación, reciclaje y gestión comunitaria de desechos</li>
+      <li>Ninguna</li>
+    </ol>
+  </div>
+
+  <div class="showcard" id="t-problematicas">
+    <span class="tag">Tarjeta 9 · Pregunta 69</span>
+    <p class="q">Señale las TRES problemáticas más críticas para la comuna</p>
+    <p class="rule">Elija exactamente 3</p>
+    <ol>
+      <li>Suministro de agua</li>
+      <li>Transporte y movilidad</li>
+      <li>Estado de las vías de acceso</li>
+      <li>Conflictos o tenencia de tierras</li>
+      <li>Falta de empleo remunerado</li>
+      <li>Migración</li>
+      <li>Violencia intrafamiliar</li>
+      <li>Pérdida de identidad cultural</li>
+      <li>Servicios de salud insuficientes</li>
+      <li>Conectividad y acceso a internet</li>
+      <li>Contaminación de recursos naturales</li>
+      <li>Inseguridad ciudadana</li>
+      <li>Adicciones y alcoholismo</li>
+      <li>Deficiencia en servicios públicos</li>
+      <li>Debilitamiento de la organización comunal</li>
+      <li>Avance urbano sobre el territorio comunal</li>
+      <li>Abandono escolar</li>
+    </ol>
+  </div>
+
+  <div class="showcard" id="t-grupos">
+    <span class="tag">Tarjeta 10 · Pregunta 70</span>
+    <p class="q">¿Qué grupos deberían ser priorizados en las gestiones del Cabildo?</p>
+    <p class="rule">Elija hasta 3</p>
+    <ol>
+      <li>Infancia y adolescencia (menores de 18 años)</li>
+      <li>Jóvenes (18 a 29 años)</li>
+      <li>Adultos mayores</li>
+      <li>Mujeres de la comuna</li>
+      <li>Población en edad de trabajar</li>
+      <li>Personas con discapacidad</li>
+      <li>Familias sin tierra</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 9 ─────────────────────────────────────────────── -->
+<section class="card" id="saltos">
+  <span class="kind">Referencia rápida</span>
+  <h2>Flujo del formulario: quién responde qué</h2>
+  <p>KoboCollect aplica estos saltos automáticamente; esta tabla sirve para entender por qué aparecen o desaparecen preguntas.</p>
+  <table>
+    <tr><th>Condición</th><th>Qué pasa</th></tr>
+    <tr><td>0.1 no es «Efectiva» ni «Efectiva parcial»</td><td>No continúe; entregue el formulario al supervisor/a.</td></tr>
+    <tr><td>0.2 = No autoriza</td><td>Agradezca y termine. Registre «Rechazo» en 0.1.</td></tr>
+    <tr><td>1 = Sí (reside aquí)</td><td>Pase a la pregunta 4.</td></tr>
+    <tr><td>1 = No (no reside aquí)</td><td>Solo secciones 3, 11, 13 y 14. Omita 2, 4, 5, 6, 7, 8, 9, 10 y 12.</td></tr>
+    <tr><td>6 = 0 predios</td><td>No llene la Matriz D; pase a la Sección 4.</td></tr>
+    <tr><td>15 = No cocina en esta vivienda</td><td>Pase a la pregunta 16.</td></tr>
+    <tr><td>19 = No tiene electricidad</td><td>Pase a la pregunta 22.</td></tr>
+    <tr><td>32 = No tuvo dificultades con el agua</td><td>Pase a la pregunta 34.</td></tr>
+    <tr><td>38 = Nadie migró desde 2020</td><td>Pase a la Sección 8.</td></tr>
+    <tr><td>41 incluye leche o cría de animales</td><td>Aplique la pregunta 42 (ganado).</td></tr>
+    <tr><td>41 incluye cultivos</td><td>Aplique la pregunta 43 (productos).</td></tr>
+    <tr><td>57 = Sí, habitualmente</td><td>Responda 58; omita 59.</td></tr>
+    <tr><td>57 = Esporádicamente</td><td>Responda 58 y 59.</td></tr>
+    <tr><td>57 = No, en ningún momento</td><td>Omita 58; responda 59.</td></tr>
+  </table>
+</section>
+
+<!-- 10 ────────────────────────────────────────────── -->
+<section class="card" id="cierre">
+  <span class="kind">Sección 14 · Leer al terminar</span>
+  <h2>Texto de cierre</h2>
+  <p class="read">Gracias por su colaboración. La información de este formulario es confidencial y quedará bajo custodia del Cabildo de la Comuna El Carmen.</p>
+</section>
+
+<footer>Extraído del Formulario Censo El Carmen v27 · Cabildo de la Comuna El Carmen · UCE</footer>
+</main>
+
+<button class="theme" id="theme" type="button" aria-label="Cambiar tema claro u oscuro">◐ Tema</button>
+
+<script>
+(function(){
+  var root=document.documentElement, KEY='guia-tema';
+  try{var t=localStorage.getItem(KEY); if(t) root.setAttribute('data-theme',t);}catch(e){}
+  document.getElementById('theme').addEventListener('click',function(){
+    var dark=root.getAttribute('data-theme')==='dark'||(!root.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme: dark)').matches);
+    var next=dark?'light':'dark'; root.setAttribute('data-theme',next);
+    try{localStorage.setItem(KEY,next);}catch(e){}
+  });
+
+  // Buscador: filtra filas de código y tarjetas; abre los desplegables que tengan coincidencias.
+  var input=document.getElementById('q');
+  var norm=function(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();};
+  input.addEventListener('input',function(){
+    var q=norm(input.value.trim());
+    document.querySelector('nav.toc').classList.toggle('hidden',!!q);
+    document.querySelectorAll('section.card').forEach(function(sec){
+      var secHit=false;
+      sec.querySelectorAll('li, tr, p.read').forEach(function(el){
+        var hit=!q||norm(el.textContent).indexOf(q)>-1;
+        el.classList.toggle('hidden',!hit); if(hit&&q) secHit=true;
+      });
+      sec.querySelectorAll('details').forEach(function(d){
+        var any=!q||d.querySelector('li:not(.hidden)')||norm(d.querySelector('summary').textContent).indexOf(q)>-1;
+        if(q&&norm(d.querySelector('summary').textContent).indexOf(q)>-1) d.querySelectorAll('li').forEach(function(li){li.classList.remove('hidden')});
+        d.classList.toggle('hidden',!any); if(q&&any){d.open=true; secHit=true;}
+      });
+      sec.querySelectorAll('.showcard').forEach(function(c){
+        var any=!q||c.querySelector('li:not(.hidden)')||norm(c.textContent).indexOf(q)>-1;
+        c.classList.toggle('hidden',!any);
+      });
+      if(q&&norm(sec.querySelector('h2').textContent).indexOf(q)>-1){secHit=true; sec.querySelectorAll('.hidden').forEach(function(e){e.classList.remove('hidden')});}
+      sec.classList.toggle('hidden',!!q&&!secHit);
+    });
+  });
+})();
+</script>
+</body>
+</html>
